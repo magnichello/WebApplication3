@@ -33,8 +33,7 @@ import webapplication3.entities.Computers;
  */
 @Named
 @RequestScoped
-public class ComputersBean {
-    private String fff;
+public class ComputersBean {    
     private String filter;
     private List<Computers> computers;
 
