@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import webapplication3.entities.Computers;
+import webapplication3.jms;
 
 /**
  *
@@ -18,23 +19,26 @@ import webapplication3.entities.Computers;
  */
 @Stateless
 public class ComputersDao {   
-    private String Filter;
+   private String mes;
     
-    @PersistenceContext
+       @PersistenceContext
         EntityManager em;
     
     public List<Computers> ComputersList(){
         return em.createQuery("SELECT p FROM Computers p",Computers.class).getResultList();
     }
 
-    
-    public String getFilter() {
-        return Filter;
+    public String getMes() {
+        return mes;
     }
 
-    public void setFilter(String Filter) {
-        this.Filter = Filter;
-    }
-            
+    public void setMes(String mes) {
+        this.mes = mes;
+    }    
     
+    
+    
+   
+    
+       
 }

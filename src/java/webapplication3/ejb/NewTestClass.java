@@ -19,13 +19,16 @@ import javax.persistence.PersistenceContext;
 import sun.net.www.http.HttpClient;
 import webapplication3.entities.Computers;
 import java.net.*;
+import java.util.List;
+import javax.inject.Named;
+import webapplication3.jms;
 /**
  *
  * @author nmagdun1
  */
-
-public class NewTestClass {       
-               
+@Startup
+public class NewTestClass {           
+    
     
     public void getContext()
     {

@@ -33,21 +33,38 @@ import webapplication3.entities.Computers;
  */
 @Named
 @RequestScoped
-public class ComputersBean {    
+public class ComputersBean { 
+   
+    static private List<String> msgs;
     private String filter;
     private List<Computers> computers;
 
     public String getFilter() {
         return filter;
     }
+    
+    public void ListAdd(String msg){
+        msgs.add(msg);
+    }
+
+    public static List<String> getMsgs() {
+        return msgs;
+    }
+
+    public static void setMsgs(List<String> msgs) {
+        ComputersBean.msgs = msgs;
+    }
 
     public void setFilter(String filter) {
         this.filter = filter;
     }
-
+    
+            
     @Inject
-    ComputersDao computersDao;
-
+    ComputersDao computersDao;      
+    
+     
+    
     public List<Computers> getComputers() {
         
             computers = computersDao.ComputersList();
@@ -68,7 +85,7 @@ public class ComputersBean {
             b=b+a;
         return b;
         
-    }
+    }    
     
     
 
