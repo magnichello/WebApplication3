@@ -7,6 +7,7 @@ package webapplication3;
 
 import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 import com.sun.tools.xjc.model.CBuiltinLeafInfo;
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,8 +15,10 @@ import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 
 import javax.inject.Inject;
@@ -54,9 +57,10 @@ public class jms implements MessageListener {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
+    
+    
+    @EJB
+    ComputersBean cb;    
     
                   
     @Override
@@ -65,7 +69,7 @@ public class jms implements MessageListener {
         try {
             if (message instanceof TextMessage) {
                 msg = (TextMessage) message;
-               System.out.println(msg.getText());                
+               cb.setMsg(msg.getText());                 
             }
 
         } catch (JMSException ex) {

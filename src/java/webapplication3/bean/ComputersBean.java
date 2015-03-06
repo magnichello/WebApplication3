@@ -16,6 +16,8 @@ import java.io.*;
 import static java.lang.System.out;
 import java.net.MalformedURLException;
 import java.util.Scanner;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.UIDFolder;
@@ -32,9 +34,10 @@ import webapplication3.entities.Computers;
  * @author nmagdun1
  */
 @Named
-@RequestScoped
+@ApplicationScoped
 public class ComputersBean { 
-   
+    
+    private String msg;
     static private List<String> msgs;
     private String filter;
     private List<Computers> computers;
@@ -42,6 +45,18 @@ public class ComputersBean {
     public String getFilter() {
         return filter;
     }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
+    
+    
+    
     
     public void ListAdd(String msg){
         msgs.add(msg);
