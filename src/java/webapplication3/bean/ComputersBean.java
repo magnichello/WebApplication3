@@ -16,10 +16,18 @@ import java.io.*;
 import static java.lang.System.out;
 import java.net.MalformedURLException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.ActivationConfigProperty;
+import javax.ejb.MessageDriven;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 import javax.mail.UIDFolder;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,16 +37,20 @@ import javax.xml.xpath.XPathFactory;
 import webapplication3.ejb.ComputersDao;
 import webapplication3.entities.Computers;
 
+
 /**
  *
  * @author nmagdun1
  */
+
+
+
 @Named
 @ApplicationScoped
-public class ComputersBean { 
+public class ComputersBean{ 
     
-    private String msg;
-    static private List<String> msgs;
+    private String msg="e";
+    private List<String> msgs;
     private String filter;
     private List<Computers> computers;
 
@@ -47,11 +59,11 @@ public class ComputersBean {
     }
 
     public String getMsg() {
-        return msg;
+        return computersDao.getMsg();
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.msg=msg;
     }
     
     
@@ -62,12 +74,12 @@ public class ComputersBean {
         msgs.add(msg);
     }
 
-    public static List<String> getMsgs() {
+    public List<String> getMsgs() {
         return msgs;
     }
 
-    public static void setMsgs(List<String> msgs) {
-        ComputersBean.msgs = msgs;
+    public void setMsgs(List<String> msgs) {
+        this.msgs = msgs;
     }
 
     public void setFilter(String filter) {
@@ -86,6 +98,12 @@ public class ComputersBean {
         
         return computers;
     }
+    
+    
+
+    
+    
+    
     public String tralala() throws MalformedURLException, SAXException, IOException, ParserConfigurationException{
         URL url=new URL("http://www.reuters.com/tools/rss");
         BufferedReader br=new BufferedReader(new InputStreamReader(url.openStream()));
@@ -93,7 +111,7 @@ public class ComputersBean {
         DocumentBuilder db = df.newDocumentBuilder();
         //Document doc = db.parse(url.openStream());
         //Element root = doc.getDocumentElement();
-        ;
+        
                 String a;
                 String b="";
         while((a=br.readLine())!=null)

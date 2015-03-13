@@ -40,7 +40,7 @@ import webapplication3.ejb.Test;
  *
  * @author nmagdun1
  */
-
+/*
 @MessageDriven(activationConfig = {
     @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/sendQueue"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
@@ -69,7 +69,9 @@ public class jms implements MessageListener {
         try {
             if (message instanceof TextMessage) {
                 msg = (TextMessage) message;
-               cb.setMsg(msg.getText());                 
+               cb.setMsg("vvvv");             
+               this.msg=msg.getText();
+               cb.ListAdd(this.msg);
             }
 
         } catch (JMSException ex) {
@@ -87,3 +89,4 @@ public class jms implements MessageListener {
     }
 
 }
+*/

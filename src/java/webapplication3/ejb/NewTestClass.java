@@ -21,7 +21,7 @@ import webapplication3.entities.Computers;
 import java.net.*;
 import java.util.List;
 import javax.inject.Named;
-import webapplication3.jms;
+
 /**
  *
  * @author nmagdun1
